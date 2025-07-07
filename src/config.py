@@ -9,9 +9,13 @@ load_dotenv()  # take environment variables
 # `os.getenv`) as if they came from the actual environment.
 
 # Load cookies from .env
-RAW_COOKIES = json.loads(os.getenv('COOKIES'))
+RAW_COOKIES = os.getenv('COOKIES')
 COOKIES = []
-for name, value in RAW_COOKIES.items():
+for item in RAW_COOKIES.split(";"):
+    item = item.strip()
+    if "=" not in item:
+        continue
+    name, value = item.split("=", 1)
     COOKIES.append({
         "name": name,
         "value": value,
