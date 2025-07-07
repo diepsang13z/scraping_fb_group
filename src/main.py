@@ -32,8 +32,8 @@ def save_to_excel(data, output_file):
     df = pd.DataFrame(data)
 
     # Write DataFrame to an Excel file
-    df.to_excel(f'../out/{output_file}', index=False, engine='openpyxl')
-    print(f"Data saved to {output_file}")
+    df.to_excel(f'../out/{output_file}.xlsx', index=False, engine='openpyxl')
+    print(f"Data saved to {output_file}.xlsx")
 
 
 group_data = []
