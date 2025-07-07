@@ -24,7 +24,13 @@ def scrape_group_info(driver, limit=10):
             # Scroll
             driver.execute_script(
                 f"window.scrollTo(0, {current_scroll_position});")
-            time.sleep(2)
+
+            WebDriverWait(driver, 10).until(
+                EC.presence_of_all_elements_located(
+                    (By.XPATH, "//div[@role='feed']//div[@role='article']")
+                )
+            )
+
             current_scroll_position += scroll_increment  # Update page position
 
             # Scraping all group available in HTML
