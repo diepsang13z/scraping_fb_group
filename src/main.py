@@ -52,6 +52,7 @@ def main():
 
             search_query = input('Enter Key Search: ')
             search_query_from_url = search_and_get_query(driver, search_query)
+            number_group = int(input("Enter number group you want scraping: "))
 
             if search_query_from_url:
                 go_to_groups_page(driver, search_query_from_url)
@@ -59,7 +60,7 @@ def main():
                 print(
                     "ERROR::Could not extract search query, skipping group navigation.")
 
-            group_data = scrape_group_info(driver, limit=50)
+            group_data = scrape_group_info(driver, limit=number_group)
             print(f'MESSAGE:: GROUP DATA: {len(group_data)}')
 
             # Save group data to an Excel file
