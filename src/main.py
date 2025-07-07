@@ -1,8 +1,10 @@
-import time
-
 import undetected_chromedriver as uc
 
-from config import COOKIES
+from navigator import (
+    login_with_cookies,
+    search_and_get_query,
+    go_to_groups_page,
+)
 
 # Config Chrome version\
 options = uc.ChromeOptions()
@@ -11,27 +13,21 @@ options.add_argument('--start-maximized')
 driver = uc.Chrome(options=options, version_main=137)
 
 
-def login_with_cookies(driver):
-    driver.get("https://www.facebook.com")
-    time.sleep(2)
-
-    for cookie in COOKIES:
-        try:
-            driver.add_cookie(cookie)
-        except Exception as e:
-            print(f"ERROR::Error when add cookie name: {cookie['name']}", e)
-
-    driver.refresh()
-    time.sleep(5)
-    print(f"Current URL: {driver.current_url}")
-
-
 def main(driver):
     login_with_cookies(driver)
-    if "login" in driver.current_url or "checkpoint" in driver.current_url:
-        print("ERROR::Login Failed!")
+
+    if 'login' in driver.current_url or 'checkpoint' in driver.current_url:
+        print('ERROR::Login Failed!')
+
+    print('MESSAGE::Login Successful!')
+
+    search_query = "Tài liệu Ielts"
+    search_query_from_url = search_and_get_query(driver, search_query)
+
+    if search_query_from_url:
+        go_to_groups_page(driver, search_query_from_url)
     else:
-        print("MESSAGE::Login Successful!")
+        print("ERROR::Could not extract search query, skipping group navigation.")
 
 
 if __name__ == '__main__':
