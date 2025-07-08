@@ -6,14 +6,12 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from config import COOKIES
 
-
-def login_with_cookies(driver):
+def login_with_cookies(driver, cookies):
     driver.get('https://www.facebook.com')
     time.sleep(2)
 
-    for cookie in COOKIES:
+    for cookie in cookies:
         try:
             driver.add_cookie(cookie)
         except Exception as e:
