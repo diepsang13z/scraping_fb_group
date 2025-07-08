@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 
 import undetected_chromedriver as uc
@@ -31,11 +32,15 @@ def get_driver():
 
 
 def save_to_excel(data, output_file):
+    # Ensure the 'out' directory exists
+    if not os.path.exists('./out'):
+        os.makedirs('./out')
+
     # Convert the list of dictionaries to a pandas DataFrame
     df = pd.DataFrame(data)
 
     # Write DataFrame to an Excel file
-    df.to_excel(f'../out/{output_file}.xlsx', index=False, engine='openpyxl')
+    df.to_excel(f'./out/{output_file}.xlsx', index=False, engine='openpyxl')
     print(f"Data saved to {output_file}.xlsx")
 
 

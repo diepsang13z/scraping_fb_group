@@ -10,3 +10,4 @@
 5. Export Cookies format "Header String"
 6. Copy/Paste your cookies to .env
 7. cd src -> python main.py
+8. Build exe: pyinstaller main.spec
