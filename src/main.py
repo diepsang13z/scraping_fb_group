@@ -1,6 +1,5 @@
 import pandas as pd
 
-from selenium import webdriver
 import undetected_chromedriver as uc
 from contextlib import contextmanager
 
@@ -16,14 +15,14 @@ from utils import (
 
 
 # Config Chrome version
-options = webdriver.ChromeOptions()
+options = uc.ChromeOptions()
 options.add_argument('--disable-blink-features=AutomationControlled')
 options.add_argument('--start-maximized')
 
 
 @contextmanager
 def get_driver():
-    driver = webdriver.Chrome(options=options, version_main=137)
+    driver = uc.Chrome(options=options, version_main=137)
     try:
         yield driver
     finally:
